@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>神経衰弱</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+		<h1>神経衰弱</h1>
+		
+		<h3>得点:<span id="score">0</span></h3>
+		
+			<div class="box">
+				<img src="images/ura.png" alt="トランプの裏" id="img1" onClick="changeIMG('img1','images/8.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img2" onClick="changeIMG('img2','images/3.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img3" onClick="changeIMG('img3','images/1.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img4" onClick="changeIMG('img4','images/6.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img5" onClick="changeIMG('img5','images/4.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img6" onClick="changeIMG('img6','images/2.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img7" onClick="changeIMG('img7','images/1.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img8" onClick="changeIMG('img8','images/9.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img9" onClick="changeIMG('img9','images/4.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img10" onClick="changeIMG('img10','images/9.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img11" onClick="changeIMG('img11','images/8.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img12" onClick="changeIMG('img12','images/3.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img13" onClick="changeIMG('img13','images/5.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img14" onClick="changeIMG('img14','images/7.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img15" onClick="changeIMG('img15','images/5.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img16" onClick="changeIMG('img16','images/2.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img17" onClick="changeIMG('img17','images/7.png')">
+				<img src="images/ura.png" alt="トランプの裏" id="img18" onClick="changeIMG('img18','images/6.png')">
+			</div>
+	
+<script>
+
+	//選んだカードを入れる箱
+	let select="";
+	//1枚目のidを入れる箱
+	let id1maime="";
+	//得点を入れる箱
+	let score=0;
+	// 裏返すまでクリックしても何もしないようにしたい
+	let uragaeshiChu=0;
+
+	//clickで数字の画像がでるようにする
+	function changeIMG(id,imgName){
+		if (uragaeshiChu==1) {
+			// 裏返し中が１なので、０になるまで何もしない
+			return;
+		}
+		document.getElementById(id).src=imgName;
+		if(select==""){
+			select=imgName;
+			id1maime=id;
+		} else if (id1maime==id) {
+			// 同じカードを選んだので何もしない
+		} else if(select==imgName){
+			//カードが合っていた場合
+			score+=10;
+			document.getElementById("score").innerHTML=score;
+			document.getElementById(id1maime).onclick="";
+			document.getElementById(id).onclick="";
+			if(score==90){
+				setTimeout(function(){
+					alert("全問正解!!");				
+				}, 200);
+			}
+			//箱を空にも戻す
+			select="";
+		} else {
+			//間違ってた場合
+			select = "";
+			//処理が速すぎるからSTOPしてもらう
+			uragaeshiChu=1;
+			setTimeout(function(){
+				console.log("裏に戻します");
+				document.getElementById(id).src="images/ura.png";
+				document.getElementById(id1maime).src="images/ura.png";
+				uragaeshiChu=0;
+			}, 1000);
+		}
+	}
+
+
+	//1.カードをEventリスナーで数字の画像がでるようにする
+	//2.1回目に選んだ画像を空の箱の中にいれる
+	//3.2で作った箱と2枚目の画像を比べる
+	//   3/1.合っていた場合はscoreに10を足して表示して箱を空にする
+	//   3/2.違っていたら箱を空にする。カードを裏にする
+	// 
+	//作る箱・・・1枚目を画像いれる箱　　点数を入れる箱　　 1枚目のidをいれる箱  
+	
+	
+	
+</script>
+</body>
+</html>
